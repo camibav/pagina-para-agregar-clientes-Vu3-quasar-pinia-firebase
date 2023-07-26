@@ -54,7 +54,8 @@ const logOut = async () => {
           AddClient
         </q-toolbar-title>
 
-        <div class="q-pa-sm">
+        <div class="q-pa-sm f ">
+          <p class="q-ma-sm text-h6"> {{ auth.currentUser.displayName }} </p>
           <q-avatar class="cursor-pointer " double size="45px">
             <img src="https://cdn.quasar.dev/img/avatar.png">
             <q-menu transition-show="jump-down" transition-hide="jump-up" fit anchor="bottom left" self="top end">
@@ -93,6 +94,7 @@ const logOut = async () => {
               </q-list>
             </q-menu>
           </q-avatar>
+
 
         </div>
 
@@ -176,5 +178,10 @@ const logOut = async () => {
 
 .top {
   top: 50%;
+}
+.f{
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 </style>
