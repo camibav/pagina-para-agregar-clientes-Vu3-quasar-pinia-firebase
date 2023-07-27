@@ -1,14 +1,17 @@
 <script setup>
-import { reactive, ref } from 'vue';
+import {onMounted, provide, reactive, ref } from 'vue';
 import { auth, db, storage } from '../firebaseConfig';
-import { ref as storageRef, uploadBytes } from 'firebase/storage';
+import { ref as storageRef, uploadBytes, getDownloadURL } from 'firebase/storage';
 import { updateProfile } from 'firebase/auth';
 import { useQuasar } from 'quasar'
-const $q = useQuasar()
+import {useUserStore} from 'src/stores/example-store';
 
+const userStore = useUserStore();
+const $q = useQuasar()
 const user = auth.currentUser;
 
 const file = ref(null)
+
 
 const formState = reactive({
   email: auth.currentUser.email,
@@ -22,9 +25,30 @@ const onFileAdded = async (fileList) => {
   file.value = fileList[0]
   const storageRefe = storageRef(storage, `${user.uid}/profile`);
   await uploadBytes(storageRefe, file.value)
+  const url = await getDownloadURL(storageRefe);
+
+  formState.photoURL = url;
+
+
 
 
 }
+const fetchProfileImage = async () => {
+  const storageRefe = storageRef(storage, `${user.uid}/profile`);
+  try {
+    const url = await getDownloadURL(storageRefe);
+    formState.photoURL = url;
+  } catch (error) {
+    // Manejar el error en caso de que la imagen no exista o haya algún problema con la descarga.
+    console.error('Error al obtener la imagen del perfil:', error);
+  }
+};
+onMounted(() => {
+  fetchProfileImage();
+});
+// fetchProfileImage();
+userStore.urlPhotoPerfil(formState.photoURL);
+
 
 
 const onSubmit = async () => {
@@ -33,10 +57,11 @@ const onSubmit = async () => {
 
     await updateProfile(user, {
       displayName: formState.displayName,
+      photoURL: formState.photoURL
 
     }
     )
-
+    file.value = null
 
     const instance = getCurrentInstance();
     instance.forceUpdate();
@@ -64,9 +89,9 @@ const onSubmit = async () => {
 <template>
   <div class="q-mt-xl q-pa-md row absolute justify-center bg-blue-8 absolute rounded-borders left " outline
     style="max-width: 100%">
-    <q-avatar size="100px" color="white" text-color="white" class="q-pa-sm q-ma-sm"><img
+    <q-avatar size="100px"  class="q-pa-sm q-ma-sm"><img
         :src="formState.photoURL" /></q-avatar>
-    <q-form @submit="onSubmit" class="q-gutter-md col-12 " style="min-width: 400px">
+    <q-form @submit.prevent="onSubmit" class="q-gutter-md col-12 " style="min-width: 400px">
       <q-input filled label="Correo electrónico" label-color="black" outlined bg-color="light-blue-2" color="white"
         v-model="formState.email" type="email" class=" q-pa-sm text-light-blue" lazy-rules
         :rules="[val => val && val.length > 0 || 'Please type something']" d />
