@@ -2,14 +2,16 @@
 <script setup>
 import { signOut } from 'firebase/auth';
 import { auth } from 'src/firebaseConfig';
-import { ref } from 'vue'
+import { inject, ref } from 'vue'
 import { useRouter } from 'vue-router';
+import { useUserStore } from 'src/stores/example-store';
 
-
+const userStore = useUserStore();
 const router = useRouter()
 const miniState = ref(false)
 const drawer = ref(false)
 const loading = ref(null)
+console.log(userStore.urlPhoto)
 
 
 const drawerClick = (e) => {
@@ -40,6 +42,7 @@ const logOut = async () => {
 }
 
 
+
 </script>
 
 <template>
@@ -57,7 +60,7 @@ const logOut = async () => {
         <div class="q-pa-sm f ">
           <p class="q-ma-sm text-h6"> {{ auth.currentUser.displayName }} </p>
           <q-avatar class="cursor-pointer " double size="45px">
-            <img src="https://cdn.quasar.dev/img/avatar.png">
+            <img :src="userStore.urlPhoto">
             <q-menu transition-show="jump-down" transition-hide="jump-up" fit anchor="bottom left" self="top end">
               <q-list bordered padding class="rounded-borders text-primary">
                 <q-item clickable v-ripple active-class="my-menu-link" @click="toProfile">
