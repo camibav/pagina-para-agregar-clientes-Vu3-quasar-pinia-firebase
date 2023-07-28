@@ -28,6 +28,10 @@ const onFileAdded = async (fileList) => {
   const url = await getDownloadURL(storageRefe);
 
   formState.photoURL = url;
+  await updateProfile(auth.currentUser, {
+    photoURL: formState.photoURL,
+  })
+  console.log(auth.currentUser)
 
 
 
@@ -38,8 +42,12 @@ const fetchProfileImage = async () => {
   try {
     const url = await getDownloadURL(storageRefe);
     formState.photoURL = url;
+    await updateProfile(auth.currentUser, {
+        photoURL: formState.photoURL,
+      })
+
   } catch (error) {
-    // Manejar el error en caso de que la imagen no exista o haya algún problema con la descarga.
+
     console.error('Error al obtener la imagen del perfil:', error);
   }
 };
