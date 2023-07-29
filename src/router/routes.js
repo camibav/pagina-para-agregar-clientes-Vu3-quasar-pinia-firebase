@@ -32,6 +32,8 @@ const routes = [
     children: [
  {path:'/main', component: () => import('pages/MainPage.vue'), beforeEnter:requiredAuth},
  {path:'/profile', component: () => import('pages/ProfilePage.vue'), beforeEnter:requiredAuth},
+ {path:'/registrar-clientes',component:()=>import('pages/AddNewClient.vue'), beforeEnter:requiredAuth},
+  {path:'/panel',component:()=>import('pages/Dashboard.vue'), beforeEnter:requiredAuth},
 
     ]
   },

@@ -99,10 +99,10 @@ const onSubmit = async () => {
 
 </script>
 <template>
-  <div class="q-mt-xll q-pa-md row justify-center bg-blue-8 rounded-borders top-0 absolute-center  " outline
+  <div class="q-mt-xl q-pa-md row justify-center bg-blue-8 rounded-borders top-0 absolute-center  " outline
     style="max-width: 100%">
     <q-icon name="mdi-login" size="5em" />
-    <q-form @submit="onSubmit" class="col-12  " style="max-width: 400px">
+    <q-form @submit="onSubmit" class="col-12   " style="max-width: 400px">
       <q-input label="Ingrese su Correo electrónico " label-color="black" outlined bg-color="light-blue-2" color="white"
         v-model="formState.email" type="email" class=" q-pa-md text-light-blue" lazy-rules
         :rules="[val => isValidEmail(val) || 'Por favor ingrese un correo valido']">
