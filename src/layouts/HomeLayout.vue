@@ -202,6 +202,13 @@ const logOut = async () => {
   /* Agregar un borde en la parte derecha del drawer para separarlo del contenido */
   border-right: 1px solid #ffffff; /* O un color similar al texto */
 }
+.q-item{
+  color:rgb(82, 82, 211);
+}
+.q-item:hover{
+  background-color: rgb(82, 82, 211);
+  color: white;
+}
 
 
 
