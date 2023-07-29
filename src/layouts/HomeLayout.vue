@@ -57,145 +57,23 @@ const logOut = async () => {
 </script>
 
 <template>
-  <!-- <q-layout view="hHh lpR fFf " class="">
 
-    <q-header elevated class="bg-primary text-white">
-      <q-toolbar class="glossy">
-
-        <q-toolbar-title>
-          <q-avatar size="60px" rounded text-color="white" icon="mdi-briefcase-plus-outline">
-          </q-avatar>
-          AddClient
-        </q-toolbar-title>
-
-        <div class="q-pa-sm f ">
-          <p class="q-ma-sm text-h6"> {{ auth.currentUser.displayName }} </p>
-          <q-avatar class="cursor-pointer " double size="45px">
-            <img :src="auth.currentUser.photoURL">
-            <q-menu transition-show="jump-down" transition-hide="jump-up" fit anchor="bottom left" self="top end">
-              <q-list bordered padding class="rounded-borders text-primary">
-                <q-item clickable v-ripple active-class="my-menu-link" @click="toProfile">
-                  <q-item-section avatar>
-                    <q-icon name="mdi-account" />
-                  </q-item-section>
-
-                  <q-item-section>Perfil</q-item-section>
-                </q-item>
-
-
-                <q-item clickable v-ripple active-class="my-menu-link">
-                  <q-item-section avatar>
-                    <q-icon name="settings" />
-                  </q-item-section>
-
-                  <q-item-section>Settings</q-item-section>
-                </q-item>
-
-                <q-item clickable v-ripple active-class="my-menu-link">
-                  <q-item-section avatar>
-                    <q-icon name="help" />
-                  </q-item-section>
-
-                  <q-item-section>Help</q-item-section>
-                </q-item>
-                <q-item clickable v-ripple @click="logOut()" active-class="my-menu-link">
-                  <q-item-section avatar>
-                    <q-icon name="mdi-close" />
-                  </q-item-section>
-
-                  <q-item-section>Cerrar sesión</q-item-section>
-                </q-item>
-              </q-list>
-            </q-menu>
-          </q-avatar>
-
-
-        </div>
-
-
-
-
-
-      </q-toolbar>
-    </q-header>
-
-    <q-drawer v-model="drawer" show-if-above :mini="!drawer || miniState" @click.capture="drawerClick" :width="200"
-      :breakpoint="500" bordered :class="$q.dark.isActive ? 'bg-grey-9' : 'primary'" >
-      <q-scroll-area class="fit" :horizontal-thumb-style="{ opacity: 0 }">
-
-        <q-list padding style="margin-top: 10px;">
-          <q-item clickable v-ripple @click="toHome">
-            <q-item-section avatar>
-              <q-icon name="mdi-home" />
-            </q-item-section>
-            <q-item-section>
-              Inicio
-            </q-item-section>
-          </q-item>
-
-
-          <q-item clickable v-ripple  @click="toAddCliente" >
-            <q-item-section avatar>
-              <q-icon name="mdi-account-plus" />
-            </q-item-section>
-
-            <q-item-section>
-              Agregar Cliente
-            </q-item-section>
-          </q-item>
-
-          <q-item clickable v-ripple  @click="toPanel">
-            <q-item-section avatar>
-              <q-icon name="mdi-view-dashboard" />
-            </q-item-section>
-
-            <q-item-section>
-             Panel
-            </q-item-section>
-          </q-item>
-          <q-item clickable v-ripple style="margin-top:8px ;">
-            <q-item-section v-if="!miniState" avatar></q-item-section>
-            <q-item-section avatar>
-              <q-btn dense round unelevated color="primary" :icon="miniState ? 'chevron_right' : 'chevron_left'"
-                @click=" miniState = true" class="text-center" />
-            </q-item-section>
-
-          </q-item>
-
-        </q-list>
-
-      </q-scroll-area>
-
-    </q-drawer>
-
-    <q-page-container class="relative-position  ">
-      <router-view class="q-mb-sm  "/>
-
-
-    </q-page-container>
-
-    <q-footer elevated class="bg-grey-8 text-white">
-      <q-toolbar>
-        <q-toolbar-title>
-        </q-toolbar-title>
-      </q-toolbar>
-    </q-footer>
-
-  </q-layout> -->
   <q-layout view="hHh lpR fFf" class="layout-with-bg">
 
 <q-header elevated class="bg-primary text-white">
   <q-toolbar class="glossy">
 
     <q-toolbar-title>
+
       <q-avatar size="60px" rounded text-color="white" icon="mdi-briefcase-plus-outline">
       </q-avatar>
       AddClient
     </q-toolbar-title>
 
-    <div class="q-pa-sm">
+    <div class="q-pa-sm f">
+      <p class="q-ma-sm text-h6"> {{ auth.currentUser.displayName }} </p>
       <q-avatar class="cursor-pointer " double size="45px">
-        <img src="https://cdn.quasar.dev/img/avatar.png">
+        <img :src="auth.currentUser.photoURL">
         <q-menu transition-show="jump-down" transition-hide="jump-up" fit anchor="bottom left" self="top end">
           <q-list bordered padding class="rounded-borders text-primary">
             <q-item clickable v-ripple active-class="my-menu-link" @click="toProfile">
